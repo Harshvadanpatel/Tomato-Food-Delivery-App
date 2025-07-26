@@ -141,7 +141,7 @@ export const food_list = [
         category: "Salad"
     }, {
         _id: "4",
-        name: "Chicken Salad",
+        name: "Grilled Salad",
         image: food_4,
         price: 24,
         description: "Food provides essential nutrients for overall health and well-being",
@@ -162,7 +162,7 @@ export const food_list = [
         category: "Rolls"
     }, {
         _id: "7",
-        name: "Chicken Rolls",
+        name: "Veg Kathi Rolls",
         image: food_7,
         price: 20,
         description: "Food provides essential nutrients for overall health and well-being",
@@ -205,7 +205,7 @@ export const food_list = [
     },
     {
         _id: "13",
-        name: "Chicken Sandwich",
+        name: "Paneer Sandwich",
         image: food_13,
         price: 12,
         description: "Food provides essential nutrients for overall health and well-being",
@@ -313,7 +313,7 @@ export const food_list = [
         category: "Pasta"
     }, {
         _id: "28",
-        name: "Chicken Pasta",
+        name: "Paneer Pasta",
         image: food_28,
         price: 24,
         description: "Food provides essential nutrients for overall health and well-being",
