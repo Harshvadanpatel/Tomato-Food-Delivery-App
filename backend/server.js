@@ -4,6 +4,7 @@ import { connectDB } from "./config/db.js"
 import foodRouter from "./routes/foodRoute.js"
 import userRouter from "./routes/userRoute.js"
 import 'dotenv/config'
+import cartRouter from "./routes/cartRoute.js"
 
 
 
@@ -24,6 +25,7 @@ connectDB();
 app.use("/api/food",foodRouter)
 app.use("/images",express.static('uploads'))
 app.use("/api/user",userRouter)
+app.use("/api/cart",cartRouter)
 
 
 app.get("/",(req,res)=>{
@@ -31,11 +33,6 @@ app.get("/",(req,res)=>{
 
 })
 
-app.listen(port,()=>{
+app.listen(port,()=>{ 
     console.log(`server started on http://localhost:${port}`)
 })
-
-// mongodb+srv://harsh_18:wIdp1R3PmxC2P0WT@cluster0.fhdv9qp.mongodb.net/?
-// retryWrites=true&w=majority&appName=Cluster0
-
-// mongodb+srv://harsh_18:wIdp1R3PmxC2P0WT@cluster0.fhdv9qp.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
