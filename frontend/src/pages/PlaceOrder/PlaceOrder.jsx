@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
 import './PlaceOrder.css'
 import { StoreContext } from '../../context/StoreContext'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 const PlaceOrder = () => {
 
@@ -26,24 +28,42 @@ const PlaceOrder = () => {
 
     const placeOrder = async (event)=>{
         event.preventDefault();
+        console.log("placeOrder called"); // Add this line
+        if (!token) {
+            alert("You must be logged in to place an order.");
+            return;
+        }
         let orderItems = [];
-        food_list.map((item)=>{
+        food_list.forEach((item)=>{
             if(cartItems[item._id]>0){
-                let itemInfo = item;
+                let itemInfo = { ...item };
                 itemInfo["quantity"] = cartItems[item._id];
                 orderItems.push(itemInfo);
             }
-        })
-        //console.log(orderItems);
-
+        });
+        if (orderItems.length === 0) {
+            alert("Your cart is empty.");
+            return;
+        }
         let orderData = {
             address:data,
             items:orderItems,
             amount:getTotalCartAmount()+2,
         }
-        //?
-        
-
+        try {
+            let response = await axios.post(url+"/api/order/place",orderData,{headers:{token}})
+            console.log("Order response:", response.data); // Add this line
+            if(response.data.success){
+                window.location.replace(response.data.session_url)
+            }
+            else{
+                alert("Error: " + (response.data.message || "Unknown error"));
+                console.log(response.data);
+            }
+        } catch (err) {
+            alert("Network or server error");
+            console.error(err);
+        }
     }
 
 
@@ -102,9 +122,12 @@ const PlaceOrder = () => {
                         </div>
                     </div>
                     <button type ="submit" >PROCEED TO PAYMENT</button>
+                    {/* <button><a href="www.google.com">CANCEL</a></button> */}
                 </div>
 
             </div>
+                                {/* <button type ="submit">procces</button> */}
+
 
         </form>
     )
