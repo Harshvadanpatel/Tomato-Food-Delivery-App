@@ -10,7 +10,7 @@ import { ToastContainer } from 'react-toastify'
 
 const App = () => {
 
-  const url = "http://localhost:4000"
+  const url = "https://tomato-food-delivery-app-r3qy.onrender.com"
 
   const token = localStorage.getItem("adminToken")
 
