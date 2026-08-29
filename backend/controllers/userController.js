@@ -6,27 +6,45 @@ import { response } from "express";
 
 
 //login user
-const loginUser = async (req,res)=>{
-    const {email,password}=req.body;
+const loginUser = async (req, res) => {
+    const { email, password } = req.body;
+
     try {
-        const user =await userModel.findOne({email});
+        const user = await userModel.findOne({ email });
+
         if (!user) {
-            return res.json({success:false,message:"User Doesn't exists"})
+            return res.json({
+                success: false,
+                message: "User Doesn't exists"
+            });
         }
-        const isMatch= await bcrypt.compare(password,user.password)
+
+        const isMatch = await bcrypt.compare(password, user.password);
 
         if (!isMatch) {
-            return res.json({success:false,message:"Invalid Credentials"})
+            return res.json({
+                success: false,
+                message: "Invalid Credentials"
+            });
         }
-        const token=createToken(user._id);
-        res.json({success:true,token}) 
 
+        const token = createToken(user._id);
+
+        res.json({
+            success: true,
+            token,
+            isAdmin: user.isAdmin
+        });
 
     } catch (error) {
         console.log(error);
-        res.json({success:false,message:"Error"})
+
+        res.status(500).json({
+            success: false,
+            message: "Error"
+        });
     }
-}
+};
 const createToken=(id)=>{
     return jwt.sign({id},process.env.JWT_SECRET)
 }

@@ -1,0 +1,35 @@
+.login {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-container {
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.login-container h2 {
+    text-align: center;
+}
+
+.login-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.login-inputs input {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.login-container button {
+    padding: 12px;
+    border: none;
+    cursor: pointer;
+}
