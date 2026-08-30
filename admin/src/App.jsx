@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from './components/Navbar/Navbar'
 import Sidebar from './components/Sidebar/Sidebar'
 import { Navigate, Route, Routes } from 'react-router-dom'
@@ -7,17 +7,59 @@ import Orders from './pages/Orders/Orders'
 import Add from './pages/Add/Add'
 import Login from './pages/Login/Login'
 import { ToastContainer } from 'react-toastify'
+import { io } from 'socket.io-client'
 
 const App = () => {
 
   const url = "http://localhost:4000"
+  // const url = "https://tomato-food-delivery-app-r3qy.onrender.com"
 
   const token = localStorage.getItem("adminToken")
+
+  // New order notification state
+  const [newOrder, setNewOrder] = useState(null)
+
+  // Socket.IO connection
+  useEffect(() => {
+
+    const socket = io(url)
+
+    socket.on("connect", () => {
+      console.log("Admin socket connected:", socket.id)
+    })
+
+    socket.on("new_order", (order) => {
+      console.log("🔔 New order received in admin:", order)
+
+      setNewOrder(order)
+
+      // Hide notification after 5 seconds
+      setTimeout(() => {
+        setNewOrder(null)
+      }, 5000)
+    })
+
+    socket.on("disconnect", () => {
+      console.log("Admin socket disconnected")
+    })
+
+    return () => {
+      socket.disconnect()
+    }
+
+  }, [])
 
   return (
     <div>
 
       <ToastContainer />
+
+      {/* New Order Notification */}
+      {newOrder && (
+        <div className="new-order-notification">
+          🔔 New Order Received!
+        </div>
+      )}
 
       {!token ? (
 
@@ -38,6 +80,7 @@ const App = () => {
       ) : (
 
         <>
+
           <Navbar />
 
           <hr />
@@ -71,6 +114,7 @@ const App = () => {
             </Routes>
 
           </div>
+
         </>
 
       )}
@@ -80,3 +124,4 @@ const App = () => {
 }
 
 export default App
+

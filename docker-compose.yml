@@ -1,0 +1,17 @@
+services:
+
+  backend:
+    build: ./backend
+    container_name: tomato-backend
+    ports:
+      - "4000:4000"
+    env_file:
+      - ./backend/.env
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:latest
+    container_name: tomato-redis
+    ports:
+      - "6379:6379"
