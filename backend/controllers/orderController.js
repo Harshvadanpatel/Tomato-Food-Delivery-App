@@ -6,8 +6,8 @@ import { getIO } from "../socket.js";
 const stripe = process.env.STRIPE_SECRET_KEY ? new Stripe(process.env.STRIPE_SECRET_KEY) : null;
 
 // placing user order from frontend
-const placeOrder = async (req, res) => {
-    //const frontend_url = process.env.FRONTEND_URL || "https://tomato-food-delivery-app-frontend-o13z.onrender.com" ;
+const placeOrder = async (req,res) => {
+
     const frontend_url = "http://localhost:5173";
 
 
@@ -144,4 +144,4 @@ const updateStatus = async (req,res) => {
 }
 
 
-export { placeOrder, verifyOrder, userOrders, listOrders, updateStatus }
+export {placeOrder,verifyOrder,userOrders,listOrders,updateStatus}

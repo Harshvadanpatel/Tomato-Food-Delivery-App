@@ -11,8 +11,12 @@ import { io } from 'socket.io-client'
 
 const App = () => {
 
+<<<<<<< HEAD
   const url = "http://localhost:4000"
   // const url = "https://tomato-food-delivery-app-r3qy.onrender.com"
+=======
+  const url = "https://tomato-food-delivery-app-r3qy.onrender.com"
+>>>>>>> b7be96d49b1d0f3bbc0428712d9bd8e9052ba125
 
   const token = localStorage.getItem("adminToken")
 
@@ -124,4 +128,7 @@ const App = () => {
 }
 
 export default App
+<<<<<<< HEAD
 
+=======
+>>>>>>> b7be96d49b1d0f3bbc0428712d9bd8e9052ba125
